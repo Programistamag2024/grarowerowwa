@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraRoweroWWA - Rywalizacja rowerowa w stolicy</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="icon" sizes="192x192" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root 
+		
+{
+            --primary-red: #C83737;
+            --bg-cream: #F5F1E9;
+            --text-black: #000000;
+        }
+		/* Tutaj wklej te ogólne */
+.hero-static-img {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+.hero-static-img:hover {
+    transform: scale(1.02);
+}
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Zilla Slab', serif;
+            background-color: var(--bg-cream);
+            color: var(--text-black);
+            line-height: 1.4;
+        }
+
+/* --- WSPÓLNE USTAWIENIA DLA OBU SEKCJI --- */
+.hero-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1300px; /* Powiększone */
+    margin: 60px auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.menu-container {
+    max-width: 1300px; /* Powiększone, aby menu było w linii z resztą */
+    margin: 0 auto;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- DETALE HERO --- */
+.hero-text h1 {
+    color: var(--primary-red);
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: 0; /* Opcjonalne: usunięcie domyślnego marginesu górnego */
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left;
+}
+
+.hero-subtext {
+    font-size: clamp(20px, 2.5vw, 26px);
+    line-height: 1.4;
+    margin-top: 15px;
+}
+
+.hero-visual {
+    flex: 1.4; /* Syrenka będzie większa od bloku tekstu */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-static-img {
+    width: 100%;
+    max-width: 700px; /* Potężna Syrenka */
+    height: auto;
+}
+
+/* --- DETALE O NAS (ZAMEK) --- */
+/* --- POPRAWIONA SEKCJA "O NAS" (ZAMEK) --- */
+.about-container {
+    max-width: 1300px;
+    margin: 60px auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.about-image-wrapper {
+    flex: 1.2; /* Obrazek nieco większy */
+    display: flex;
+    justify-content: center;
+}
+
+.about-content-wrapper {
+    flex: 1;
+}
+
+.about-image {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    display: block;
+}
+
+/* --- RESPORSYWNOŚĆ DLA OBU SEKCJI (HERO I O NAS) --- */
+@media (max-width: 850px) {
+    /* Naprawa Hero (Syrenka) */
+    .hero-wrapper {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .hero-visual {
+        order: 2; /* Obrazek pod tekst */
+        width: 100%;
+        justify-content: center;
+    }
+    .hero-text {
+        order: 1;
+        margin-bottom: 30px;
+    }
+
+    /* Naprawa Sekcji "O nas" (Zamek) */
+    .about-container {
+        flex-direction: column !important; /* Wymuszamy pionowy układ */
+        text-align: center;
+        padding: 0 20px;
+        gap: 30px;
+    }
+    .about-image-wrapper {
+        order: 1; /* Obrazek na górę */
+    }
+    .about-content-wrapper {
+        order: 2; /* Tekst pod obrazek */
+    }
+}
+      /* --- NOWE STYLE DLA INSTRUKCJI --- */
+:root {
+    --primary-red: #C83737;
+    --bg-cream: #F5F1E9;
+}
+
+.brand-name {
+    color: var(--primary-red);
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.how-it-works-section {
+    margin: 5px auto;
+    max-width: 1300px; /* Zwiększone z 1100px */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.how-it-works-title {
+    color: var(--text-black);
+    font-family: 'Zilla Slab', serif;
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* Widoczność wersji */
+.mobile-view { display: none; }
+.desktop-view { display: block; width: 100%; height: auto; }
+
+/* Obsługa wersji mobilnej */
+@media (max-width: 600px) {
+    .desktop-view { 
+        display: none !important; 
+    }
+    .mobile-view { 
+        display: flex !important; 
+        flex-direction: column;
+        gap: 15px; 
+        align-items: center;
+        width: 100%;
+    }
+    .mobile-view img {
+        width: 100%;
+        max-width: 440px; 
+        height: auto;
+    }
+    .how-it-works-title { 
+        font-size: 26px; 
+    }
+}
+.bonusy-container {
+    width: 100%;
+    max-width: 1300px; /* Zwiększone z 1000px, by wyrównać do reszty */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.bonusy-img, .desktop-view {
+    width: 100%;
+    height: auto;
+    max-width: 1250px; /* Pozwala grafikom stać się dużymi i czytelnymi */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Na bardzo małych telefonach możemy dać odrobinę oddechu po bokach */
+@media (max-width: 600px) {
+    .bonusy-container {
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+}      
+
+      
+        /* Nowy, wydzielony wygląd sekcji Newslettera */
+/* 1. Najpierw ogólny wygląd sekcji (widoczny wszędzie) */
+.newsletter-section {
+    background-color: #E8E2D6; 
+    padding: 40px 30px;
+    border-radius: 15px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 40px auto 60px;
+    max-width: 1000px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* 2. Teraz styl tekstu (widoczny wszędzie) */
+.newsletter-text {
+    font-size: 24px;       /* Rozmiar fontu */
+    font-weight: 700;       /* Pogrubienie */
+    margin: 0;
+    color: var(--text-black);
+    flex: 1;
+    min-width: 300px;
+}
+
+/* 3. Na końcu modyfikacje TYLKO dla telefonów */
+@media (max-width: 900px) {
+    .newsletter-section {
+        flex-direction: column;
+        text-align: center;
+        margin: 30px 20px;
+        padding: 30px 20px;
+    }
+    .newsletter-text {
+        font-size: 22px; /* Kapkę mniejszy na telefonie, żeby się mieścił */
+        min-width: unset;
+    }
+}
+
+        /* Stylizacja formularza BigMailer */
+        #form\[e1179500-aa2f-465d-9087-52eed6bc286d\] {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #form\[e1179500-aa2f-465d-9087-52eed6bc286d\] p {
+            margin: 0;
+        }
+
+        #form\[e1179500-aa2f-465d-9087-52eed6bc286d\] input[type="email"] {
+            padding: 10px 15px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            width: 250px;
+            font-family: 'Zilla Slab', serif;
+            box-sizing: border-box;
+        }
+
+        #button\[e1179500-aa2f-465d-9087-52eed6bc286d\] {
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Zilla Slab', serif;
+        }
+
+       /* Nowa sekcja dla partnerów */
+.partnership-section {
+    margin: 40px auto 60px;
+    padding: 20px;
+    text-align: center;
+}
+
+.partnership-text {
+    font-size: 22px;
+    margin-bottom: 25px;
+    font-weight: 400;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-black);
+}
+
+.partnership-button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--primary-red);
+    border: 2px solid var(--primary-red);
+    padding: 12px 35px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-family: 'Zilla Slab', serif;
+    text-transform: uppercase;
+}
+
+.partnership-button:hover {
+    background-color: var(--primary-red);
+    color: white;
+} 
+
+/* --- NOWE MENU Z LOGO I BURGEREM --- */
+.top-menu {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-cream);
+    z-index: 2000; /* Zwiększone, by zawsze było na wierzchu */
+    border-bottom: 1px solid #E8E2D6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.menu-container {
+    max-width: 1300px; /* Zmień z 1100px */
+    margin: 0 auto;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.menu-logo img {
+    height: 28px;
+    width: auto;
+}
+
+.logo-text {
+    color: var(--primary-red);
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: 'Zilla Slab', serif;
+}
+/* --- IKONA FACEBOOKA W MENU --- */
+.fb-icon-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 18px !important; 
+    color: var(--primary-red) !important;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease !important;
+}
+
+.fb-icon-link:hover {
+    transform: scale(1.2);
+    color: #1877F2 !important; /* Zmienia się na niebieski FB przy najechaniu */
+}
+
+/* Poprawka, żeby ikona była w pionie w menu mobilnym */
+@media (max-width: 850px) {
+    .menu-links.active .fb-icon-link {
+        justify-content: center;
+        padding: 10px 0;
+    }
+}
+
+.menu-links {
+    display: flex;
+    gap: 30px;
+}
+
+.menu-links a {
+    text-decoration: none;
+    color: var(--text-black);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.menu-links a:hover {
+    color: var(--primary-red);
+}
+
+.burger-icon {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.burger-icon span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-red);
+    border-radius: 2px;
+}
+
+/* WERSJA MOBILNA (poniżej 850px) */
+@media (max-width: 850px) {
+    .menu-container {
+        padding: 10px 20px;
+    }
+
+    .burger-icon {
+        display: flex;
+    }
+
+    .menu-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-cream);
+        padding: 20px 0;
+        border-bottom: 1px solid #E8E2D6;
+        gap: 20px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .menu-links.active {
+        display: flex;
+    }
+
+    .logo-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo-text {
+        display: none; /* Zostaje samo logo na bardzo małych ekranach */
+    }
+}
+
+       
+
+        /* Stopka - wyśrodkowana */
+       footer {
+    background-color: var(--primary-red);
+    color: white;
+    padding: 60px 20px;
+    margin-top: 30px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.footer-logo img {
+    height: 120px; /* Możesz dostosować wielkość logo */
+    width: auto;
+}
+
+.footer-content {
+    text-align: left; /* Tekst wyrównany do lewej obok logo */
+}
+
+footer p {
+    margin: 8px 0;
+    font-size: 18px;
+}
+
+footer a {
+    color: white;
+    text-decoration: underline;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+/* Responsywność dla telefonów - logo nad tekstem */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    .footer-content {
+        text-align: center;
+    }
+}
+
+        /* Modal dla Polityki Prywatności */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: white;
+            color: black;
+            margin: 5% auto;
+            padding: 30px;
+            width: 70%;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .close-modal {
+            color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .newsletter-section { flex-direction: column; text-align: center; }
+            #form\[e1179500-aa2f-465d-9087-52eed6bc286d\] { flex-direction: column; width: 100%; }
+            #form\[e1179500-aa2f-465d-9087-52eed6bc286d\] input[type="email"] { width: 100%; }
+        }
+/* Nowy, elastyczny styl dla sekcji z tekstem i ilustracją */
+.about-container {
+    max-width: 1300px; /* Szerokość dostosowana do dwóch kolumn */
+    margin: 40px auto 60px;
+    padding: 0 20px;
+    display: flex; /* Kluczowe: włącza układ elastyczny */
+    align-items: center; /* Wyśrodkowuje tekst pionowo względem obrazka */
+    gap: 40px; /* Odstęp między tekstem a obrazkiem */
+    text-align: left; /* Zmieniamy wyrównanie tekstu na do lewej */
+}
+
+/* Kolumna z tekstem */
+.about-content-wrapper {
+    flex: 1; /* Zajmuje 1 "część" dostępnej szerokości */
+}
+
+.about-title {
+    color: var(--text-black); /* Kolor dopasowany do nagłówków na stronie */
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about-content {
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--text-black);
+}
+
+.about-content p {
+    margin-bottom: 15px;
+}
+
+/* Kolumna z ilustracją */
+.about-image-wrapper {
+    flex: 1.4; /* Zajmuje 1 "część" dostępnej szerokości, taką samą jak tekst */
+    display: flex;
+    justify-content: left; /* Wyśrodkowuje obrazek w jego kolumnie */
+}
+
+.about-image {
+    width: 100%;
+    max-width: 650px; /* Maksymalna szerokość ilustracji */
+    height: auto;
+    display: block;
+}
+/* Rowerek na całej stronie */
+body {
+    cursor: url('rower-kursor.svg') 16 16, auto;
+}
+
+/* Zmiana na standardową łapkę przy linkach/przyciskach, 
+   żeby użytkownik miał pewność, że element jest klikalny */
+a, button, .partnership-button, .burger-icon {
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+<audio id="bikeBell">
+    <source src="bell.wav" type="audio/mpeg">
+</audio>
+<nav class="top-menu">
+    <div class="menu-container">
+        <a href="#" class="menu-logo">
+            <img src="favicon.svg" alt="Gra RoweroWWA">
+            <span class="logo-text">Gra RoweroWWA</span>
+        </a>
+
+        <div class="burger-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <div class="menu-links" id="menuLinks">
+    <a href="#jak-to-dziala" onclick="toggleMenu()">JAK TO DZIAŁA?</a>
+    <a href="#newsletter" onclick="toggleMenu()">ZAPISZ SIĘ</a>
+    <a href="#partnerzy" onclick="toggleMenu()">PARTNERSTWO</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://www.facebook.com/Grarowerowwa" target="_blank" class="fb-icon-link">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+</div>
+    </div>
+</nav>
+
+<div class="container">
+<div class="hero-wrapper">
+    <div class="hero-text">
+        <h1>WARSZAWO!</h1>
+        <div class="hero-subtext">
+    <strong>Smarujemy łańcuchy i szlifujemy kod appki. 
+    Niebawem startujemy z rywalizacją rowerową w stolicy!</strong>
+</div>
+    </div>
+
+    <div class="hero-visual">
+        <img src="syrena_statyczna.svg" alt="Syrenka Warszawska - Gra RoweroWWA" class="hero-static-img">
+    </div>
+</div>
+
+<div class="brand-name">Gra RoweroWWA</div>
+<section class="about-container">
+    <div class="about-image-wrapper">
+        <img src="zamek.svg" alt="Ilustracja rowerzystów" class="about-image">
+    </div>
+
+    <div class="about-content-wrapper">
+        <h2 class="about-title">Dlaczego organizujemy rywalizację Gra RoweroWWA?</h2>
+        <div class="about-content">
+            <p>
+                Od kilku lat z powodzeniem organizujemy we Wrocławiu rywalizację rowerową <strong>„W kółko kręcę”</strong>.
+                Zdobyliśmy doświadczenie, sprawdziliśmy rozwiązania w praktyce i zbudowaliśmy solidne zaplecze techniczne.
+            </p>
+            <p>
+                Teraz czas na kolejny krok — przenosimy tę inicjatywę na warszawskie ścieżki rowerowe,
+                aby jeszcze więcej osób mogło czerpać radość z aktywności i wspólnej rywalizacji.
+            </p>
+        </div>
+    </div>
+</section>
+<div class="how-it-works-section" id="jak-to-dziala">
+    <h2 class="how-it-works-title">Jak to będzie działać?</h2>
+    
+    <img src="Krzywa_LP.svg" class="desktop-view" alt="Instrukcja desktop">
+
+    <div class="mobile-view">
+        <img src="krok1.png" alt="Krok 1">
+        <img src="krok2.png" alt="Krok 2">
+        <img src="krok3.png" alt="Krok 3">
+        <img src="krok4.png" alt="Krok 4">
+    </div>
+</div>
+
+<div class="how-it-works-section">
+    <h2 class="how-it-works-title">Będą zamieniane kilometry na nagrody</h2>
+    
+    <div class="bonusy-container desktop-view">
+        <img src="bonusy.svg" class="bonusy-img" alt="Zamieniaj kilometry na nagrody">
+    </div>
+
+    <div class="mobile-view">
+        <img src="bonus1.png" alt="Punkty">
+        <img src="bonus2.png" alt="Bonusy">
+        <img src="bonus3.png" alt="Nagrody">
+    </div>
+</div>
+
+
+    <div class="newsletter-section" id="newsletter">
+        <p class="newsletter-text">
+            Chcesz być na bieżąco? Zostaw nam swój e-mail. Poinformujemy Cię kiedy startujemy.
+        </p>
+
+        <form id="form[e1179500-aa2f-465d-9087-52eed6bc286d]" method="POST" target="_blank" action="https://app.bigmailer.io/t/f/e1179500-aa2f-465d-9087-52eed6bc286d">
+            <p>
+                <input type="email" name="field[9ac71c30-6ac3-4740-bae7-9db15aca645f]" id="field[9ac71c30-6ac3-4740-bae7-9db15aca645f]" required="required" placeholder="Twój e-mail">
+            </p>
+            <div id="field[e1179500-aa2f-465d-9087-52eed6bc286d:6LcUecYUAAAAAAp7k9KThmnoRWrRrC4NXh9ghQQ6]"></div>
+            <p id="success[e1179500-aa2f-465d-9087-52eed6bc286d]" style="display:none;color:green; font-weight: bold;">Dziękujemy!</p>
+            <p><button id="button[e1179500-aa2f-465d-9087-52eed6bc286d]" type="submit">ZATWIERDZAM</button></p>
+        </form>
+    </div>
+
+    <div class="partnership-section" id="partnerzy">
+    <p class="partnership-text">
+        Zapraszamy też do kontaktu firmy i instytucje, które chciałyby być partnerem konkursu, fundatorem nagród itp.
+    </p>
+    <a href="mailto:admin@programistamag.pl" class="partnership-button">ZOSTAŃ PARTNEREM</a>
+</div>
+</div>
+<div style="background-color: rgba(200, 55, 55, 0.05); padding: 50px 20px; text-align: center; border-top: 1px dashed #C83737; border-bottom: 1px dashed #C83737; margin: 40px 0;">
+    <h3 style="color: var(--primary-red); font-size: 28px; margin-bottom: 10px;">Podoba Ci się nasza inicjatywa?</h3>
+    <p style="max-width: 600px; margin: 0 auto 25px auto; font-size: 22px; line-height: 1.5;">
+        Projekt tworzymy z pasji do rowerów i Warszawy. Każda "kawa" pomaga nam pokryć koszty serwerów i szybciej rozwijać aplikację dla Was!
+    </p>
+    <a href="https://buycoffee.to/grarowerowwa" target="_blank" style="display: inline-block; transition: transform 0.2s ease;">
+        <img src="https://buycoffee.to/static/img/share/share-button-primary.png" 
+             style="width: 200px; height: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 8px;" 
+             alt="Postaw nam kawę na buycoffee.to"
+             onmouseover="this.parentElement.style.transform='scale(1.05)'" 
+             onmouseout="this.parentElement.style.transform='scale(1)'">
+    </a>
+</div>
+
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">
+            <img src="logo-stopka.svg" alt="GraRoweroWWA Logo">
+        </div>
+        <div class="footer-content">
+            <p>© 2026 GraRoweroWWA.pl powered by Prosolvers sp. z o.o. x <a href="https://programistamag.pl/" target="_blank" class="footer-link">Programistamag.pl</a></p>
+            <p>
+                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+                <a href="mailto:admin@programistamag.pl">Kontakt</a>
+            </p>
+            <p><a href="https://www.facebook.com/Grarowerowwa" target="_blank">Znajdź nas na Facebooku</a></p>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    var _bmxq = _bmxq || [];
+    _bmxq.push(["_setupForm", "form[e1179500-aa2f-465d-9087-52eed6bc286d]", {"sitekey": "6LcUecYUAAAAAAp7k9KThmnoRWrRrC4NXh9ghQQ6", "size": "invisible"}, false]);
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('policyModal')) {
+            document.getElementById('policyModal').style.display = "none";
+  
+    }
+}
+    
+</script>
+<script async src="https://cdn.bigmailer.io/lib.js"></script>
+<script>
+  window.addEventListener('load', () => {
+    const player = document.querySelector('dotlottie-player');
+    
+    if (player) {
+        player.addEventListener('ready', () => {
+            try {
+                player.setAttribute("renderConfig", JSON.stringify({
+                    devicePixelRatio: 2
+                }));
+            } catch(e) {}
+            player.play();
+        });
+
+        setTimeout(() => player.play(), 500);
+    }
+});
+</script>
+<script>
+// 1. Obsługa menu mobilnego
+function toggleMenu() {
+    const menu = document.getElementById('menuLinks');
+    menu.classList.toggle('active');
+}
+
+// 2. Skrypt dzwonka rowerowego (Syrenka)
+// Uruchamia się dopiero po załadowaniu DOM, żeby mieć pewność, że elementy istnieją
+document.addEventListener('DOMContentLoaded', () => {
+    const syrenka = document.querySelector('.hero-static-img');
+    const bellSound = document.getElementById('bikeBell');
+
+    if (syrenka && bellSound) {
+        syrenka.addEventListener('mouseenter', () => {
+            // Resetujemy czas do zera, żeby dzwoniło przy każdym najechaniu
+            bellSound.currentTime = 0;
+            
+            const playPromise = bellSound.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Interakcja wymagana: Kliknij raz na stronie, aby odblokować dźwięk.");
+                });
+            }
+        });
+    }
+});
+</script>
+
+</body>
+</html>

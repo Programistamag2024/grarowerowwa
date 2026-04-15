@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulamin - GraRoweroWWA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        :root {
+            --primary-red: #C83737;
+            --bg-cream: #F5F1E9;
+            --text-black: #000000;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Zilla Slab', serif;
+            background-color: var(--bg-cream);
+            color: var(--text-black);
+            line-height: 1.6;
+        }
+
+        .top-menu { position: sticky; top: 0; background-color: var(--bg-cream); z-index: 2000; border-bottom: 1px solid #E8E2D6; }
+        .menu-container { max-width: 1300px; margin: 0 auto; padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .menu-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .menu-logo img { height: 28px; }
+        .logo-text { color: var(--primary-red); font-weight: 700; text-transform: uppercase; }
+        .menu-links a { text-decoration: none; color: var(--text-black); font-weight: 700; margin-left: 20px; font-size: 14px; }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Tytuł będzie ładowany dynamicznie */
+        h1#reg-title { color: var(--primary-red); font-size: 36px; border-bottom: 3px solid var(--primary-red); padding-bottom: 10px; margin-top: 0; }
+        
+        .legal-text {
+            font-size: 18px;
+            margin-top: 30px;
+        }
+        /* Style dla treści z Markdowna */
+        .legal-text h2 { color: var(--primary-red); font-size: 24px; margin-top: 25px; }
+        .legal-text p { margin-bottom: 15px; }
+
+        footer { background-color: var(--primary-red); color: white; padding: 40px 20px; text-align: center; margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+<nav class="top-menu">
+    <div class="menu-container">
+        <a href="index.html" class="menu-logo">
+            <img src="favicon.svg" alt="Gra RoweroWWA">
+            <span class="logo-text">Gra RoweroWWA</span>
+        </a>
+        <div class="menu-links">
+            <a href="index.html">POWRÓT DO STRONY GŁÓWNEJ</a>
+        </div>
+    </div>
+</nav>
+
+<div class="legal-container">
+    <h1 id="reg-title">Ładowanie regulaminu...</h1>
+    <div id="reg-content" class="legal-text">
+        </div>
+</div>
+
+<footer>
+    <p>© 2026 GraRoweroWWA.pl</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    // Pobieranie treści z pliku, który tworzy Twój panel admina
+    fetch('regulamin.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Nie znaleziono pliku regulaminu. Opublikuj go w panelu /admin.');
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('reg-title').innerText = data.title;
+            document.getElementById('reg-content').innerHTML = marked.parse(data.body);
+        })
+        .catch(err => {
+            document.getElementById('reg-title').innerText = "Błąd ładowania";
+            document.getElementById('reg-content').innerHTML = "<p>Upewnij się, że stworzyłeś treść w panelu administratora.</p>";
+        });
+</script>
+
+</body>
+</html>

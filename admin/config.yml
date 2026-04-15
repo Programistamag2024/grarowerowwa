@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main # lub master, zależnie jak masz na GitHubie
+
+media_folder: "images" # folder na zdjęcia wrzucane w edytorze
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Strony"
+    files:
+      - file: "regulamin.json" # CMS będzie zapisywać treść w tym małym pliku
+        label: "Regulamin"
+        name: "regulamin"
+        fields:
+          - { label: "Tytuł", name: "title", widget: "string" }
+          - { label: "Treść regulaminu", name: "body", widget: "markdown" }

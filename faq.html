@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - GraRoweroWWA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #C83737;
+            --bg-cream: #F5F1E9;
+            --text-black: #000000;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Zilla Slab', serif;
+            background-color: var(--bg-cream);
+            color: var(--text-black);
+            line-height: 1.4;
+        }
+        .top-menu {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-cream);
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            z-index: 1000;
+            border-bottom: 1px solid #E8E2D6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .top-menu a {
+            text-decoration: none;
+            color: var(--text-black);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .top-menu a:hover { color: var(--primary-red); }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 40px;
+            text-align: left;
+        }
+        h1 {
+            color: var(--primary-red);
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+        .faq-item { margin-bottom: 35px; }
+        .faq-item strong { 
+            display: block; 
+            font-size: 1.25rem; 
+            margin-bottom: 10px; 
+            line-height: 1.2;
+        }
+        .faq-item p { font-size: 18px; line-height: 1.6; margin: 0; }
+        
+        @media (max-width: 600px) {
+            .faq-container { margin: 30px auto; padding: 0 20px; }
+            .top-menu { gap: 15px; }
+            .top-menu a { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-menu">
+    <a href="index.html">← POWRÓT DO STRONY GŁÓWNEJ</a>
+</nav>
+
+<div class="faq-container">
+    <h1>Często zadawane pytania</h1>
+    
+    <div class="faq-list">
+        <div class="faq-item">
+            <strong>Dlaczego macie napis "strona w budowie"?</strong>
+            <p>Bo to nie jest ostateczna wersja strony. W przygotowaniu mamy serwis, w którym uczestnicy rywalizacji będą zakładać konta połączone z aplikacją.</p>
+        </div>
+
+        <div class="faq-item">
+            <strong>Dlaczego organizujecie rywalizację rowerową w Warszawie?</strong>
+            <p>Bo Warszawa to nasze miasto i najwyższy czas na nową skalę działania! Choć od kilku lat z sukcesem organizujemy podobną rywalizację w innym dużym ośrodku w Polsce, większość naszego zespołu to warszawiacy. Naturalnym krokiem jest więc przeniesienie tego doświadczenia na własne podwórko. Po prostu mamy marzenie, by nasi sąsiedzi mieli dostęp do ciekawej i zdrowej zabawy!</p>
+        </div>
+
+        <div class="faq-item">
+            <strong>Jakie nagrody planujecie w rywalizacji?</strong>
+            <p>Planujemy jasny podział na nagrody główne, większe i bardziej wartościowe, np. rowery za miejsca w rankingu, oraz nagrody za punkty np.: wejściówki do muzeów, kin, teatrów, darmowe kawy czy obiady w restauracjach itp. <strong>Zapraszamy firmy do współpracy – to świetna reklama!</strong></p>
+        </div>
+
+        <div class="faq-item">
+            <strong>Na czym konkretnie polega ta rywalizacja?</strong>
+            <p>Jeździsz rowerem, zbierasz punkty w naszej aplikacji i mierzysz się z innymi. Będzie limit 30 km dziennie (by wyrównać szanse) oraz bonusy za stałe trasy (dom-praca) i zapraszanie znajomych. Bardzo konkretne szczegóy będą w regulaminie, któty opublikujemy niebawem.</p>
+        </div>
+
+        <div class="faq-item">
+            <strong>Czy udział w rywalizacji jest bezpłatny?</strong>
+            <p>Tak, ranking indywidualny i dzielnicowy będą bezpłatne. Rankingi firmowe będą płatne, co pozwoli nam utrzymać serwery. Jeśli chcesz nas wesprzeć dodatkowo:</p>
+            <a href="https://buycoffee.to/grarowerowwa" target="_blank">
+                <img src="https://buycoffee.to/static/img/share/share-button-primary.png" style="width: 185px; height: 48px; margin-top: 15px;" alt="Postaw mi kawę">
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
