@@ -21,13 +21,12 @@
         }
 		/* Tutaj wklej te ogólne */
 .hero-static-img {
+    display: block !important; /* Wymusza wyświetlenie elementu */
+    width: 100% !important;    /* Zajmuje całą dostępną szerokość kontenera */
+    max-width: 700px;         /* Maksymalny rozmiar Syrenki */
+    height: auto;             /* Zachowuje proporcje grafiki */
     transition: transform 0.3s ease;
     cursor: pointer;
-    display: block !important; /* Wymusza wyświetlanie */
-    width: 100% !important;    /* Zajmuje dostępną szerokość */
-    max-width: 700px;         /* Ale nie więcej niż 700px */
-    height: auto;             /* Zachowuje proporcje */
-    min-height: 200px;        /* Rezerwuje miejsce, żeby strona nie skakała */
 }
 .hero-static-img:hover {
     transform: scale(1.02);
