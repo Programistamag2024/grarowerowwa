@@ -50,39 +50,39 @@
         .legal-text h2 { color: var(--primary-red); font-size: 24px; margin-top: 25px; }
         .legal-text p { margin-bottom: 15px; }
 
-/* Główne tło stopki */
+/* Główna sekcja stopki */
 .footer {
     background-color: var(--primary-red);
     color: white;
-    padding: 40px 20px;
+    padding: 60px 20px; /* Zwiększyłem padding, żeby stopka była większa */
     margin-top: 60px;
 }
 
-/* Kontener, który ustawia elementy w linii */
+/* Kontener - teraz wyśrodkowany */
 .footer-container {
-    max-width: 1200px;
+    max-width: 1000px; /* Nieco węższy max-width lepiej wygląda przy centrowaniu */
     margin: 0 auto;
-    display: flex;         /* TO USTAWIA LOGO Z BOKU */
-    align-items: center;   /* Centruje w pionie */
-    gap: 40px;             /* Odstęp między logo a tekstem */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* TO WYŚRODKOWUJE CAŁY BLOK */
+    gap: 50px;              /* Większy odstęp między logo a tekstem */
 }
 
-/* Styl dla samego logo */
+/* Styl dla logo - powiększone */
 .footer-logo img {
-    height: 100px;         /* Rozmiar taki jak na głównej */
+    height: 120px;         /* Zwiększyłem z 100px na 120px */
     width: auto;
     display: block;
 }
 
-/* Styl dla tekstów i linków */
+/* Styl dla tekstów - większa czcionka */
 .footer-content {
-    text-align: left;      /* Tekst wyrównany do lewej */
-    flex: 1;
+    text-align: left;
+    font-size: 16px;       /* Zwiększyłem bazową czcionkę */
 }
 
 .footer-content p {
-    margin: 8px 0;
-    font-size: 14px;
+    margin: 12px 0;
     line-height: 1.6;
 }
 
@@ -90,18 +90,25 @@
     color: white;
     text-decoration: none;
     font-weight: 600;
-    margin-right: 15px;
+    margin-right: 20px;
+    font-size: 16px;
 }
 
 .footer-content a:hover {
     text-decoration: underline;
 }
 
-/* Responsywność - na telefonach logo wskoczy nad tekst */
+/* Styl dla linku "Programistamag.pl" - żeby był wyraźny */
+.footer-link {
+    text-decoration: underline !important;
+}
+
+/* Responsywność dla telefonów */
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
         text-align: center;
+        gap: 20px;
     }
     .footer-content {
         text-align: center;
